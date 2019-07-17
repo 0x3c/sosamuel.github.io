@@ -2,7 +2,7 @@
  * @Author: Samuel Chia
  * @Date: 2019-07-17 10:41:42
  * @Last Modified by: Samuel Chia
- * @Last Modified time: 2019-07-17 15:28:39
+ * @Last Modified time: 2019-07-17 15:32:21
  */
 
 const util = require("util");
@@ -68,8 +68,11 @@ const runGit = async () => {
       console.log("Nothing changed!");
       return;
     }
+    console.log("Step 1. add changed files");
     await gitAdd();
+    console.log("Step 2. make a commit");
     await gitCommit();
+    console.log("Step 3. push to origin");
     await gitPush();
     console.log("commit your changed files successfully!");
   } catch (error) {
