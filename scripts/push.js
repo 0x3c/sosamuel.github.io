@@ -2,7 +2,7 @@
  * @Author: Samuel Chia
  * @Date: 2019-07-17 10:41:42
  * @Last Modified by: Samuel Chia
- * @Last Modified time: 2019-07-17 11:32:32
+ * @Last Modified time: 2019-07-17 15:27:59
  */
 
 const util = require("util");
@@ -35,6 +35,19 @@ const gitAdd = async () => {
     throw new Error(stderr);
   }
 };
+
+/**
+ *
+ * @returns boolean
+ */
+const hasChanged = async () => {
+  const nothingChangeStr = "nothing to commit, working tree clean";
+  const { stderr, stdout } = await exec("git status");
+  if (stderr) {
+    throw new Error(stderr);
+  }
+  return !stdout.includes(nothingChangeStr);
+};
 const gitCommit = async () => {
   const { stderr } = await exec(`git commit -m "${commitMsg}"`);
   if (stderr) {
@@ -50,6 +63,11 @@ const gitPush = async () => {
 
 const runGit = async () => {
   try {
+    const changed = await hasChanged();
+    if (!changed) {
+      console.log("Nothing changed!");
+      return;
+    }
     await gitAdd();
     await gitCommit();
     await gitPush();
