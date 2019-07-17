@@ -2,7 +2,7 @@
  * @Author: Samuel Chia
  * @Date: 2019-07-17 10:41:42
  * @Last Modified by: Samuel Chia
- * @Last Modified time: 2019-07-17 11:29:04
+ * @Last Modified time: 2019-07-17 11:32:32
  */
 
 const util = require("util");
@@ -41,11 +41,18 @@ const gitCommit = async () => {
     throw new Error(stderr);
   }
 };
+const gitPush = async () => {
+  const { stderr } = await exec(`git push origin source:source`);
+  if (stderr) {
+    throw new Error(stderr);
+  }
+};
 
 const runGit = async () => {
   try {
     await gitAdd();
     await gitCommit();
+    await gitPush();
   } catch (error) {
     throw error;
   }
