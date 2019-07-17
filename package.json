@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "hexo server",
-    "deploy": "hexo g -d",
+    "deploy": "hexo g -d && yarn run push",
     "push": "node scripts/push.js"
   },
   "hexo": {
