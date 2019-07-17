@@ -2,7 +2,7 @@
  * @Author: Samuel Chia
  * @Date: 2019-07-17 10:41:42
  * @Last Modified by: Samuel Chia
- * @Last Modified time: 2019-07-17 15:27:59
+ * @Last Modified time: 2019-07-17 15:28:39
  */
 
 const util = require("util");
@@ -71,6 +71,7 @@ const runGit = async () => {
     await gitAdd();
     await gitCommit();
     await gitPush();
+    console.log("commit your changed files successfully!");
   } catch (error) {
     throw error;
   }
